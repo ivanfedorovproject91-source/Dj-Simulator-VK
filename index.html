@@ -28,7 +28,8 @@ input{font:inherit;width:100%;padding:12px;border-radius:10px;border:2px solid v
 
 /* === VK: адаптация под мобильный VK и десктопный VK (окно игры на компьютере) === */
 html{-webkit-text-size-adjust:100%}
-body{height:100%;overflow-x:hidden;overflow-y:auto;-webkit-overflow-scrolling:touch}
+body{height:100%;overflow:hidden}
+#sc{position:fixed;inset:0;overflow-x:hidden;overflow-y:scroll;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
 button{cursor:pointer;transition:filter .12s,transform .06s}
 button:active:not(:disabled){transform:scale(.985)}
 @media (hover:hover){button:hover:not(:disabled){filter:brightness(1.12)}}
@@ -59,7 +60,7 @@ button:active:not(:disabled){transform:scale(.985)}
  .splash{padding-bottom:12px}
  .tap{height:90px}
 }
-</style></head><body><div id="app"></div>
+</style></head><body><div id="sc"><div id="app"></div></div>
 <script>
 const tg=window.Telegram&&Telegram.WebApp;try{tg.ready();tg.expand();tg.setHeaderColor('#14122e');tg.setBackgroundColor('#14122e')}catch(e){}
 const $=id=>document.getElementById(id),app=$('app'),K='djsim_v1';

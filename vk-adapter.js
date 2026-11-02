@@ -3,7 +3,7 @@
 var B=window.vkBridge,Q=new URLSearchParams(location.search),uid=Q.get('vk_user_id')||'';
 try{if(B){B.send('VKWebAppInit').catch(function(){});B.send('VKWebAppSetViewSettings',{status_bar_style:'light',action_bar_color:'#14122e',navigation_bar_color:'#14122e'}).catch(function(){})}}catch(e){}
 /* десктопный VK: окно приложения бывает выше видимой области страницы — подгоняем высоту под экран */
-try{if(B&&Q.get('vk_platform')==='desktop_web'){var fit=function(){var h=Math.max(600,Math.min(900,(screen.availHeight||800)-190));B.send('VKWebAppResizeWindow',{width:Math.min(innerWidth||1000,1000),height:h}).catch(function(){})};fit();addEventListener('resize',function(){clearTimeout(fit.t);fit.t=setTimeout(fit,300)})}}catch(e){}
+try{if(B&&Q.get('vk_platform')==='desktop_web'){var fit=function(){var h=Math.max(600,Math.min(900,(screen.availHeight||800)-190));B.send('VKWebAppResizeWindow',{width:Math.min(innerWidth||1000,1000),height:h}).then(function(){window.__rz='ok '+h}).catch(function(e){window.__rz='err '+JSON.stringify(e&&e.error_data||e)})};fit();addEventListener('resize',function(){clearTimeout(fit.t);fit.t=setTimeout(fit,300)})}}catch(e){}
 var CH=3000; /* лимит VK Storage: 4096 символов на ключ, режем на куски */
 function sset(k,v){return B?B.send('VKWebAppStorageSet',{key:k,value:v}):Promise.reject(new Error('no bridge'))}
 var CS={
@@ -21,4 +21,7 @@ var W={ready:function(){},expand:function(){},setHeaderColor:function(){},setBac
 window.Telegram={WebApp:W};
 /* pid() в игре даёт 'tg'+id; для VK подменяем ниже в vk-patch.js */
 window.__VK_UID=uid;
+/* ВРЕМЕННАЯ диагностика (потом удалить) */
+addEventListener('DOMContentLoaded',function(){var d=document.createElement('div');d.style.cssText='position:fixed;left:0;top:0;z-index:99999;background:rgba(0,0,0,.75);color:#0f0;font:11px monospace;padding:3px 6px;pointer-events:none';document.body.appendChild(d);
+ setInterval(function(){var sc=document.getElementById('sc');d.textContent='plat='+(Q.get('vk_platform')||'?')+' inner='+innerWidth+'x'+innerHeight+' scr='+screen.availHeight+' sc='+(sc?sc.scrollHeight+'/'+sc.clientHeight:'-')+' rz='+(window.__rz||'-')},700)});
 })();
