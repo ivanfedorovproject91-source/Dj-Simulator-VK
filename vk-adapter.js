@@ -21,7 +21,4 @@ var W={ready:function(){},expand:function(){},setHeaderColor:function(){},setBac
 window.Telegram={WebApp:W};
 /* pid() в игре даёт 'tg'+id; для VK подменяем ниже в vk-patch.js */
 window.__VK_UID=uid;
-/* ВРЕМЕННАЯ диагностика (потом удалить) */
-addEventListener('DOMContentLoaded',function(){var d=document.createElement('div');d.style.cssText='position:fixed;left:0;top:0;z-index:99999;background:rgba(0,0,0,.75);color:#0f0;font:11px monospace;padding:3px 6px;pointer-events:none';document.body.appendChild(d);
- setInterval(function(){var sc=document.getElementById('sc');d.textContent='plat='+(Q.get('vk_platform')||'?')+' inner='+innerWidth+'x'+innerHeight+' scr='+screen.availHeight+' sc='+(sc?sc.scrollHeight+'/'+sc.clientHeight:'-')+' rz='+(window.__rz||'-')},700)});
 })();
