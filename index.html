@@ -8,6 +8,7 @@
 <style>
 :root{--bg:#14122e;--card:#221e4d;--ac:#9b3cff;--ac2:#ff3dcb;--tx:#f4f0ff;--mu:#a49dd4;--ok:#3ddc97;--bad:#ff5a6e;--yl:#ffd23d}
 *{box-sizing:border-box;touch-action:manipulation}
+html{height:100%}
 html,body{margin:0;min-height:100%;background:var(--bg);color:var(--tx);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;-webkit-user-select:none;user-select:none}
 #app{max-width:480px;margin:0 auto;padding:calc(10px + env(safe-area-inset-top)) 12px calc(16px + env(safe-area-inset-bottom))}
 .card{background:var(--card);border-radius:12px;padding:12px;margin:8px 0;line-height:1.4;font-size:15px}
@@ -19,7 +20,7 @@ button:focus-visible,input:focus-visible{outline:2px solid var(--yl)}
 .bar i{display:block;height:100%;background:var(--ac);width:0}
 .st{display:grid;grid-template-columns:1fr 1fr;gap:6px 12px;font-size:13px;margin-top:6px}
 h2{margin:4px 0 8px}.mu{color:var(--mu);font-size:13px}
-.splash{position:fixed;inset:0;background:#14122e url(splash.png) center/cover no-repeat;display:flex;flex-direction:column;justify-content:flex-end;padding:0 28px calc(36px + env(safe-area-inset-bottom))}
+.splash{position:fixed;inset:0;overflow-y:auto;background:#14122e url(splash.png) center/cover no-repeat;display:flex;flex-direction:column;justify-content:flex-end;padding:0 28px calc(36px + env(safe-area-inset-bottom))}
 .splash button{background:rgba(155,60,255,.88);border:2px solid var(--ac2)}
 .splash button.g{background:rgba(20,18,46,.85)}
 input{font:inherit;width:100%;padding:12px;border-radius:10px;border:2px solid var(--ac);background:#0d0b21;color:var(--tx);font-size:18px;margin:8px 0}
@@ -27,7 +28,7 @@ input{font:inherit;width:100%;padding:12px;border-radius:10px;border:2px solid v
 
 /* === VK: адаптация под мобильный VK и десктопный VK (окно игры на компьютере) === */
 html{-webkit-text-size-adjust:100%}
-body{overscroll-behavior:none}
+body{height:100%;overflow-x:hidden;overflow-y:auto;-webkit-overflow-scrolling:touch}
 button{cursor:pointer;transition:filter .12s,transform .06s}
 button:active:not(:disabled){transform:scale(.985)}
 @media (hover:hover){button:hover:not(:disabled){filter:brightness(1.12)}}
@@ -43,7 +44,8 @@ button:active:not(:disabled){transform:scale(.985)}
  .tap{height:170px;font-size:26px;border-radius:16px}
  .row>button{width:auto}
  #tipb{max-width:640px!important;font-size:15px!important}
- .splash{top:0;bottom:0;right:auto;left:50%;width:min(100vw,calc(100vh*.5628));transform:translateX(-50%);box-shadow:0 0 80px rgba(155,60,255,.35)}
+ .splash{background:#0a0620 url(splash-wide.jpg) center bottom/cover no-repeat;align-items:center;overflow-y:auto;padding-bottom:calc(28px + env(safe-area-inset-bottom))}
+ .splash>*{width:100%;max-width:440px}
 }
 @media (min-width:1100px){
  #app{max-width:860px}

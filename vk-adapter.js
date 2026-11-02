@@ -2,6 +2,8 @@
 (function(){
 var B=window.vkBridge,Q=new URLSearchParams(location.search),uid=Q.get('vk_user_id')||'';
 try{if(B){B.send('VKWebAppInit').catch(function(){});B.send('VKWebAppSetViewSettings',{status_bar_style:'light',action_bar_color:'#14122e',navigation_bar_color:'#14122e'}).catch(function(){})}}catch(e){}
+/* десктопный VK: окно приложения бывает выше видимой области страницы — подгоняем высоту под экран */
+try{if(B&&Q.get('vk_platform')==='desktop_web'){var fit=function(){var h=Math.max(600,Math.min(900,(screen.availHeight||800)-190));B.send('VKWebAppResizeWindow',{width:Math.min(innerWidth||1000,1000),height:h}).catch(function(){})};fit();addEventListener('resize',function(){clearTimeout(fit.t);fit.t=setTimeout(fit,300)})}}catch(e){}
 var CH=3000; /* лимит VK Storage: 4096 символов на ключ, режем на куски */
 function sset(k,v){return B?B.send('VKWebAppStorageSet',{key:k,value:v}):Promise.reject(new Error('no bridge'))}
 var CS={
